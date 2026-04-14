@@ -3,8 +3,9 @@
 // Centralised API client — all backend calls live here.
 // The CRA proxy setting in package.json forwards /api/* to localhost:5000.
 // ─────────────────────────────────────────────────────────────────────────────
+const API = process.env.NEXT_PUBLIC_API_URL ||"http://localhost:3001/api"
 
-const BASE = "http://localhost:3001/api";
+const BASE = `${API}/api`;
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, {

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createTrip } from "../api";
 import { saveRecentTrip, getRecentTrip } from "../utils";
 import styles from "./page.module.css";
@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-  const recentTripId = getRecentTrip();
+  const [recentTripId, setRecentTripId] = useState(null);
+
+  useEffect(() => {
+    setRecentTripId(getRecentTrip());
+  }, []);
 
   const [tripName, setTripName] = useState("");
   const [memberInput, setMemberInput] = useState("");
