@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useTrip } from "../../../hooks/useTrip";
 import { deleteExpense, updateExpense } from "../../../api";
 import { saveRecentTrip, formatCurrency, formatDate } from "../../../utils";
-import Avatar from "../../../components/Avatar";
-import AddExpenseModal from "../../../components/AddExpenseModal";
+import { ShareButton, Avatar, AddExpenseModal } from "@/components";
 import styles from "./page.module.css";
 import { useRouter, useParams } from "next/navigation";
 
@@ -55,14 +54,21 @@ export default function TripPage() {
         </button>
 
         <div>
-          <h1 className={styles.title}>{trip.name}</h1>
+          <div className={styles.titleRow}>
+            <h1 className={styles.title}>{trip.name}</h1>
+            <ShareButton tripId={id} />
+          </div>
           <p className={styles.meta}>
             {members.length} members · {expenses.length} expenses ·{" "}
             {formatCurrency(balance?.totalSpend || 0)} total
           </p>
         </div>
 
-        <button className={styles.addBtn} onClick={() => setModal(true)} title="Add expense">
+        <button
+          className={styles.addBtn}
+          onClick={() => setModal(true)}
+          title="Add expense"
+        >
           + Add expense
         </button>
       </div>

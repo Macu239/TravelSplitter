@@ -33,6 +33,13 @@
   margin-top: 2px;
 }
 
+.titleRow {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
 /* title */
 .title {
   font-size: 22px;
@@ -106,14 +113,14 @@
 }
 
 .tabBtn:hover {
-  color: #534ab7;
-  border-bottom-color: #534ab7;
+  color: #343a40;
+  border-bottom-color: #343a40;
 }
 
 /* active tab */
 .tabActive {
-  color: #534ab7;
-  border-bottom-color: #534ab7;
+  color: #343a40;
+  border-bottom-color: #343a40;
 }
 
 /* card */

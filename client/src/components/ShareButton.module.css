@@ -1,0 +1,48 @@
+/* styles/ShareButton.module.css */
+
+.shareBtn {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: inherit;
+  transition:
+    background 0.1s ease,
+    transform 0.18s ease;
+}
+
+.shareBtn:active {
+  transform: scale(0.90);
+}
+
+.shareBtn:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.idle {
+  background: var(--clr-accent);
+}
+.idle:hover {
+  background: var(--clr-accent-dk);
+}
+
+.copied {
+  background: var(--clr-success);
+  transform: scale(0.99);
+}
+.error {
+  background: var(--clr-danger);
+}
+
+.icon {
+  width: 20px;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
