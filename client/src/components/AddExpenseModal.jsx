@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Avatar from "./Avatar";
 import { addExpense, updateExpense } from "../api";
+import "./AddExpenseModal.css";
 
 export default function AddExpenseModal({
   trip,
@@ -87,24 +88,24 @@ export default function AddExpenseModal({
 
   return (
     <div
-      style={overlay}
+      className="overlay"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div style={modal}>
-        <div style={modalHeader}>
+      <div className="modal">
+        <div className="modalHeader">
           <span style={{ fontWeight: 600, fontSize: 16 }}>
             {editingExp ? "Edit expense" : "Add expense"}
           </span>
-          <button style={closeBtn} onClick={onClose}>
+          <button className="closeBtn" onClick={onClose}>
             ✕
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div style={field}>
-            <label style={label}>Description (optional)</label>
+          <div className="field">
+            <label className="label">Description (optional)</label>
             <input
-              style={input}
+              className="input"
               placeholder="Dinner, hotel, taxi..."
               value={form.description}
               onChange={(e) =>
@@ -113,11 +114,11 @@ export default function AddExpenseModal({
             />
           </div>
 
-          <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+          <div className="field" id="amountAndDate">
             <div style={{ flex: 1 }}>
-              <label style={label}>Amount ($)</label>
+              <label className="label">Amount ($)</label>
               <input
-                style={input}
+                className="input"
                 type="number"
                 min="0.01"
                 step="0.01"
@@ -129,9 +130,9 @@ export default function AddExpenseModal({
               />
             </div>
             <div style={{ flex: 1 }}>
-              <label style={label}>Date</label>
+              <label className="label">Date</label>
               <input
-                style={input}
+                className="input"
                 type="date"
                 value={form.date}
                 onChange={(e) =>
@@ -141,10 +142,10 @@ export default function AddExpenseModal({
             </div>
           </div>
 
-          <div style={field}>
-            <label style={label}>Paid by</label>
+          <div className="field">
+            <label className="label">Paid by</label>
             <select
-              style={input}
+              className="input"
               value={form.paidBy}
               onChange={(e) =>
                 setForm((f) => ({ ...f, paidBy: e.target.value }))
@@ -159,29 +160,25 @@ export default function AddExpenseModal({
             </select>
           </div>
 
-          <div style={field}>
-            <label style={label}>
+          <div className="field">
+            <label className="label">
               Who shared this?{" "}
               <span style={{ color: "#888", fontWeight: 400 }}>
                 ({form.participants.length} of {members.length})
               </span>
             </label>
-            <div style={checkGrid}>
+            <div className="checkGrid">
               {members.map((m, i) => {
                 const checked = form.participants.includes(m);
                 return (
                   <label
                     key={m}
-                    style={{
-                      ...checkItem,
-                      background: checked ? "#F5F3FF" : "transparent",
-                    }}
+                    className={`checkItem ${checked ? "checkItemChecked" : ""}`}
                   >
                     <input
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleParticipant(m)}
-                      style={{ accentColor: "#534AB7" }}
                     />
                     <Avatar name={m} index={i} size={22} />
                     <span style={{ fontSize: 13 }}>{m}</span>
@@ -191,7 +188,7 @@ export default function AddExpenseModal({
             </div>
           </div>
 
-          {error && <p style={errorStyle}>{error}</p>}
+          {error && <p className="errorStyle">{error}</p>}
 
           <div
             style={{
@@ -201,10 +198,10 @@ export default function AddExpenseModal({
               marginTop: 16,
             }}
           >
-            <button type="button" style={btnSecondary} onClick={onClose}>
+            <button type="button" className="btnSecondary" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" style={btnPrimary} disabled={saving}>
+            <button type="submit" className="btnPrimary" disabled={saving}>
               {saving ? "Saving..." : "Save expense"}
             </button>
           </div>
@@ -214,92 +211,4 @@ export default function AddExpenseModal({
   );
 }
 
-const overlay = {
-  position: "fixed",
-  inset: 0,
-  background: "rgba(0,0,0,0.45)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 100,
-  padding: "1rem",
-};
-const modal = {
-  background: "#fff",
-  borderRadius: 12,
-  padding: "1.5rem",
-  width: "100%",
-  maxWidth: 440,
-  boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
-};
-const modalHeader = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: 16,
-};
-const closeBtn = {
-  background: "none",
-  border: "none",
-  fontSize: 16,
-  cursor: "pointer",
-  color: "#666",
-  padding: 4,
-};
-const field = { marginBottom: 12 };
-const label = {
-  display: "block",
-  fontSize: 12,
-  color: "#666",
-  marginBottom: 4,
-  fontWeight: 500,
-};
-const input = {
-  width: "100%",
-  padding: "8px 10px",
-  fontSize: 14,
-  fontFamily: "inherit",
-  border: "0.5px solid #ccc",
-  borderRadius: 8,
-  background: "#fafafa",
-  outline: "none",
-  boxSizing: "border-box",
-};
-const checkGrid = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: 6,
-  marginTop: 4,
-};
-const checkItem = {
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-  padding: "6px 8px",
-  border: "0.5px solid #e5e5e5",
-  borderRadius: 8,
-  fontSize: 13,
-  cursor: "pointer",
-};
-const errorStyle = { color: "#A32D2D", fontSize: 13, marginTop: 8 };
-const btnPrimary = {
-  padding: "8px 16px",
-  background: "#534AB7",
-  color: "#fff",
-  border: "none",
-  borderRadius: 8,
-  fontSize: 13,
-  fontWeight: 500,
-  cursor: "pointer",
-  fontFamily: "inherit",
-};
-const btnSecondary = {
-  padding: "8px 16px",
-  background: "transparent",
-  color: "#333",
-  border: "0.5px solid #ccc",
-  borderRadius: 8,
-  fontSize: 13,
-  cursor: "pointer",
-  fontFamily: "inherit",
-};
+

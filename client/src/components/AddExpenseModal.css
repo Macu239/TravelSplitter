@@ -1,0 +1,130 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 0.5px solid #ccc;
+  border-radius: 8px;
+  background: #fafafa;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  gap: 10;
+}
+
+#amountAndDate {
+  flex-direction: row;
+  gap: 12px;
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: transparent;
+}
+
+.checkItemChecked {
+  color: #f5f3ff;
+}
+
+.checkItem span {
+  color: var(--primary-text);
+}
+
+input[type="checkbox"] {
+  border: 0.5px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  accent-color: var(--primary-btn);
+}
+
+.errorStyle {
+  color: #a32d2d;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.btnPrimary {
+  padding: 8px 16px;
+  background: var(--primary-btn);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnSecondary {
+  padding: 8px 16px;
+  background: transparent;
+  color: #333;
+  border: 0.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}

@@ -54,7 +54,7 @@
 .addBtn {
   margin-left: auto;
   padding: 8px 14px;
-  background: #534ab7;
+  background: var(--primary-btn);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -79,7 +79,7 @@
   align-items: center;
   gap: 5px;
   padding: 3px 9px;
-  border: 0.5px solid #e5e5e5;
+  border: 0.5px solid var(--primary-border);
   border-radius: 20px;
 }
 
@@ -105,6 +105,11 @@
   margin-bottom: -1px;
 }
 
+.tabBtn:hover {
+  color: #534ab7;
+  border-bottom-color: #534ab7;
+}
+
 /* active tab */
 .tabActive {
   color: #534ab7;
@@ -113,7 +118,7 @@
 
 /* card */
 .card {
-  background: #fff;
+  background: var(--secondary-background);
   border: 0.5px solid #e5e5e5;
   border-radius: 0 0 12px 12px;
   border-top: none;
@@ -141,7 +146,7 @@
   display: flex;
   align-items: center;
   padding: 12px 1rem;
-  border-bottom: 0.5px solid #f0f0f0;
+  border-bottom: 0.5px solid var(--primary-border);
   justify-content: space-between;
 }
 
@@ -150,7 +155,7 @@
 }
 
 .expenseRow:hover {
-  background-color: #000;
+  background-color: #e9ecef67;
   padding: inherit 0px;
   cursor: pointer;
 }
@@ -202,7 +207,7 @@
   white-space: nowrap;
 }
 
-.expenseRight{
+.expenseRight {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -232,8 +237,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 0;
-  border-bottom: 0.5px solid #f0f0f0;
+  padding: 11px 1rem;
+  border-bottom: 0.5px solid var(--primary-border);
 }
 
 /* settle row */
@@ -241,8 +246,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 0;
-  border-bottom: 0.5px solid #f0f0f0;
+  padding: 10px 1rem;
+  border-bottom: 0.5px solid var(--primary-border);
+}
+
+.settleRow:last-child {
+  border-bottom: none;
 }
 
 /* arrow */

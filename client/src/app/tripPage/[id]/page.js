@@ -62,7 +62,7 @@ export default function TripPage() {
           </p>
         </div>
 
-        <button className={styles.addBtn} onClick={() => setModal(true)}>
+        <button className={styles.addBtn} onClick={() => setModal(true)} title="Add expense">
           + Add expense
         </button>
       </div>
@@ -157,7 +157,7 @@ export default function TripPage() {
                 <div>
                   <div className={styles.balanceName}>{b.name}</div>
                   <div className={styles.balanceMeta}>
-                    paid {formatCurrency(b.paid)} · owes{" "}
+                    paid {formatCurrency(b.paid)} · owes/total spent{" "}
                     {formatCurrency(b.owed)}
                   </div>
                 </div>
@@ -185,12 +185,20 @@ export default function TripPage() {
           ) : (
             balance?.settlements.map((t, i) => (
               <div key={i} className={styles.settleRow}>
-                <Avatar name={t.from} size={28} />
+                <Avatar
+                  name={t.from}
+                  size={28}
+                  index={members.findIndex((m) => m.name === t.from)}
+                />
                 <span className={styles.personText}>{t.from}</span>
 
                 <span className={styles.arrow}>→</span>
 
-                <Avatar name={t.to} size={28} />
+                <Avatar
+                  name={t.to}
+                  size={28}
+                  index={members.findIndex((m) => m.name === t.to)}
+                />
                 <span className={styles.personText}>{t.to}</span>
 
                 <span className={styles.settleAmt}>

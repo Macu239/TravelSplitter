@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { createTrip } from "../api";
-import { saveRecentTrip, getRecentTrip } from "../utils";
+import { saveRecentTrip, getRecentTrip, getAvatarColor } from "../utils";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
@@ -86,7 +86,7 @@ export default function Home() {
         </div>
 
         {tab === "create" && (
-          <form onSubmit={handleCreate}>
+          <form onSubmit={handleCreate} className="creatTrip">
             <div className={styles.field}>
               <label className={styles.label}>Trip name</label>
               <input
@@ -187,15 +187,12 @@ export default function Home() {
   );
 }
 
-const COLORS = ["#EEEDFE", "#E1F5EE", "#FAECE7", "#EAF3DE", "#FAEEDA"];
-const TEXT = ["#3C3489", "#085041", "#712B13", "#27500A", "#633806"];
-
 const avatar = (i) => ({
   width: 20,
   height: 20,
   borderRadius: "50%",
-  background: COLORS[i % 5],
-  color: TEXT[i % 5],
+  background: getAvatarColor(i).bg,
+  color: getAvatarColor(i).text,
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
