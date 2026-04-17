@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useTrip } from "../../../hooks/useTrip";
-import { deleteExpense } from "../../../api";
+import { deleteExpense, updateExpense } from "../../../api";
 import { saveRecentTrip, formatCurrency, formatDate } from "../../../utils";
 import Avatar from "../../../components/Avatar";
 import AddExpenseModal from "../../../components/AddExpenseModal";
@@ -15,6 +15,7 @@ export default function TripPage() {
 
   const { trip, expenses = [], balance, loading, error, refetch } = useTrip(id);
   const [tab, setTab] = useState("expenses");
+  const [editingExp, setEditingExp] = useState(null);
   const [modal, setModal] = useState(false);
 
   // Save trip ID so user can return from home
@@ -36,7 +37,7 @@ export default function TripPage() {
 
   const members = trip.members;
 
-  async function handleDeleteExpense(expId) {
+  const handleDeleteExpense = async (expId) => {
     if (!window.confirm("Delete this expense?")) return;
     try {
       await deleteExpense(expId);
@@ -44,7 +45,7 @@ export default function TripPage() {
     } catch (e) {
       alert(e.message);
     }
-  }
+  };
 
   return (
     <div className={styles.page}>
@@ -104,7 +105,12 @@ export default function TripPage() {
             </div>
           ) : (
             expenses.map((exp) => (
-              <div key={exp._id} className={styles.expenseRow}>
+              <div
+                key={exp._id}
+                className={styles.expenseRow}
+                onClick={() => setEditingExp(exp)}
+                title="Edit expense"
+              >
                 <div className={styles.expenseLeft}>
                   <Avatar
                     name={exp.paidBy}
@@ -112,7 +118,7 @@ export default function TripPage() {
                     size={30}
                   />
 
-                  <div>
+                  <div className={styles.expenseInfo}>
                     <div className={styles.expDesc}>
                       {exp.description || "Expense"}
                     </div>
@@ -130,7 +136,7 @@ export default function TripPage() {
                   <span className={styles.amount}>
                     {formatCurrency(exp.amount)}
                   </span>
-
+                  {/*delete expense */}
                   <button
                     className={styles.delBtn}
                     onClick={() => handleDeleteExpense(exp._id)}
@@ -207,6 +213,20 @@ export default function TripPage() {
             setModal(false);
             refetch();
           }}
+          initialValues={null}
+        />
+      )}
+
+      {editingExp && (
+        <AddExpenseModal
+          trip={trip}
+          onClose={() => setEditingExp(null)}
+          onSaved={() => {
+            setEditingExp(null);
+            refetch();
+          }}
+          editingExp={editingExp}
+          initialValues={editingExp}
         />
       )}
     </div>

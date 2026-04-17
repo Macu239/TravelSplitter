@@ -3,7 +3,7 @@
 // Centralised API client — all backend calls live here.
 // The CRA proxy setting in package.json forwards /api/* to localhost:5000.
 // ─────────────────────────────────────────────────────────────────────────────
-const API = process.env.NEXT_PUBLIC_API_URL ||"http://localhost:3001/api"
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 const BASE = `${API}/api`;
 
@@ -54,6 +54,9 @@ export const getTripBalance = (tripId) => request(`/trips/${tripId}/balance`);
  */
 export const addExpense = (payload) =>
   request("/expenses", { method: "POST", body: payload });
+
+export const updateExpense = (expenseId, payload) =>
+  request(`/expenses/${expenseId}`, { method: "PUT", body: payload });
 
 /** Delete an expense by id. */
 export const deleteExpense = (expenseId) =>
