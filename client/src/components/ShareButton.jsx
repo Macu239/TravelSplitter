@@ -33,6 +33,7 @@ export default function ShareButton({ tripId }) {
     >
       {state === "idle" && (
         <img src="/share.svg" alt="Share icon" className={styles.icon} />
+        
       )}
       {label}
     </button>

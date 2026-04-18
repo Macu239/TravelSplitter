@@ -215,10 +215,6 @@ export default function TripPage() {
           ))}
       </div>
 
-      <div className={styles.shareBox}>
-        <span className={styles.shareText}>Share trip ID with your group:</span>
-        <code className={styles.codeBox}>{id}</code>
-      </div>
       {modal && (
         <AddExpenseModal
           trip={trip}

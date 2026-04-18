@@ -95,8 +95,8 @@
 .btnPrimary {
   width: 100%;
   padding: 10px;
-  background: var(--primary-purple);
-  color: #343a40;
+  background: var(--primary-btn);
+  color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -106,7 +106,7 @@
 }
 
 .btnPrimary:hover {
-  background: #6C757D;
+  background: var(--primary-btn-hover);
   color: #fff;
 }
 

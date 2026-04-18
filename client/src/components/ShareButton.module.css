@@ -6,8 +6,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 4px 0;
-  color: #fff;
+  padding: 4px 4px;
+  color:#fff;
   border: none;
   border-radius: 6px;
   font-weight: 500;
@@ -27,22 +27,22 @@
 }
 
 .idle {
-  background: var(--clr-accent);
+  background: var(--primary-btn);
 }
 .idle:hover {
-  background: var(--clr-accent-dk);
+  background: var(--primary-btn-hover);
 }
 
 .copied {
-  background: var(--clr-success);
+  background: var(--primary-btn);
   transform: scale(0.99);
 }
 .error {
-  background: var(--clr-danger);
+  background: #A32D2D;
 }
 
 .icon {
-  width: 20px;
+  width: 12px;
   aspect-ratio: 1;
   flex-shrink: 0;
 }
