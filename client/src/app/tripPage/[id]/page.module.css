@@ -163,7 +163,7 @@
 
 .expenseRow:hover {
   background-color: #e9ecef67;
-  padding: inherit 1rem;
+  padding: 12px 1rem;
   cursor: pointer;
 }
 
