@@ -7,6 +7,7 @@ export const metadata = {
   title: "Travel Splitter",
   description:
     "A simple splitter for group trips. Create a trip, add expenses, and see who owes what.",
+  viewport: { width: "device-width", initialScale: 1 },
 };
 
 export default function RootLayout({ children }) {

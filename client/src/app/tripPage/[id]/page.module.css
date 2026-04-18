@@ -324,3 +324,21 @@
 .neutral {
   color: #888;
 }
+
+@media (width < 500px) {
+
+  .header{
+    gap: 0px;
+  }
+
+  .backBtn{
+    width: 20%;
+  }
+  .header > div:has(.titleRow) {
+    width: 80%;
+  }
+
+  .titleRow {
+    justify-content: space-between;
+  }
+}
