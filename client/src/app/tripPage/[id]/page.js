@@ -17,6 +17,10 @@ export default function TripPage() {
   const [editingExp, setEditingExp] = useState(null);
   const [modal, setModal] = useState(false);
 
+  const sortedexpenses = expenses.sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  );
+
   // Save trip ID so user can return from home
   useEffect(() => {
     if (id) saveRecentTrip(id);
@@ -110,7 +114,7 @@ export default function TripPage() {
               Tap "Add expense".
             </div>
           ) : (
-            expenses.map((exp) => (
+            sortedexpenses.map((exp) => (
               <div
                 key={exp._id}
                 className={styles.expenseRow}
