@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Trip = require('../models/Trip');
-const Expense = require('../models/Expense');
+const Trip = require("../models/Trip");
+const Expense = require("../models/Expense");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GET /api/trips/:id/balance
@@ -10,18 +10,18 @@ const Expense = require('../models/Expense');
 //   balances[]  — per-member paid / owed / net
 //   settlements[] — minimal payment instructions (who pays whom how much)
 // ─────────────────────────────────────────────────────────────────────────────
-router.get('/:id/balance', async (req, res, next) => {
+router.get("/:id/balance", async (req, res, next) => {
   try {
     const trip = await Trip.findById(req.params.id);
-    if (!trip) return res.status(404).json({ error: 'Trip not found' });
+    if (!trip) return res.status(404).json({ error: "Trip not found" });
 
     const expenses = await Expense.find({ tripId: req.params.id });
 
     const memberNames = trip.members.map((m) => m.name);
 
     // ── Step 1: accumulate paid and owed per member ──────────────────────────
-    const paid = {};   // total each member has paid out
-    const owed = {};   // total each member owes (their share of each expense)
+    const paid = {}; // total each member has paid out
+    const owed = {}; // total each member owes (their share of each expense)
 
     memberNames.forEach((name) => {
       paid[name] = 0;
@@ -78,8 +78,12 @@ router.get('/:id/balance', async (req, res, next) => {
 // ─────────────────────────────────────────────────────────────────────────────
 function computeSettlements(balances) {
   // Deep-copy so we can mutate without affecting the original balances array
-  const debtors  = balances.filter((b) => b.net < -0.01).map((b) => ({ name: b.name, amount: -b.net }));
-  const creditors = balances.filter((b) => b.net > 0.01).map((b) => ({ name: b.name, amount: b.net }));
+  const debtors = balances
+    .filter((b) => b.net < -0.01)
+    .map((b) => ({ name: b.name, amount: -b.net }));
+  const creditors = balances
+    .filter((b) => b.net > 0.01)
+    .map((b) => ({ name: b.name, amount: b.net }));
 
   const transactions = [];
   let d = 0;
@@ -96,10 +100,10 @@ function computeSettlements(balances) {
       });
     }
 
-    debtors[d].amount  -= transferAmount;
+    debtors[d].amount -= transferAmount;
     creditors[c].amount -= transferAmount;
 
-    if (debtors[d].amount < 0.01)  d++;
+    if (debtors[d].amount < 0.01) d++;
     if (creditors[c].amount < 0.01) c++;
   }
 
