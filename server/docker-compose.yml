@@ -1,0 +1,21 @@
+services:
+  server: 
+    build: . 
+    ports:
+     - "3001:3001"
+    environment:
+      DB_URL: mongodb://mongo:27017/travelsplitter
+      PORT: 3001
+    depends_on:
+      mongo:
+        condition: service_healthy
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+            test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+volumes:
+  mongo-data:
