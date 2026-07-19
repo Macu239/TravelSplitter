@@ -200,14 +200,3 @@ const avatar = (i) => ({
   fontWeight: 700,
   flexShrink: 0,
 });
-
-function NotFound() {
-  return (
-    <div style={{ textAlign: "center", padding: "4rem 1rem" }}>
-      <h2>Page not found</h2>
-      <a href="/" className={styles.link}>
-        ← Go home
-      </a>
-    </div>
-  );
-}

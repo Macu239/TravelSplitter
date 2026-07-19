@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useTrip } from "../../../hooks/useTrip";
-import { deleteExpense, updateExpense } from "../../../api";
+import { deleteExpense} from "../../../api";
 import { saveRecentTrip, formatCurrency, formatDate } from "../../../utils";
 import { ShareButton, Avatar, AddExpenseModal } from "@/components";
 import styles from "./page.module.css";
@@ -12,7 +12,16 @@ export default function TripPage() {
   const params = useParams();
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
 
-  const { trip, expenses = [], balance, loading, error, refetch } = useTrip(id);
+  const {
+    trip,
+    expenses = [],
+    balance,
+    loading,
+    error,
+    addExpenseLocal,
+    updateExpenseLocal,
+    removeExpenseLocal,
+  } = useTrip(id);
   const [tab, setTab] = useState("expenses");
   const [editingExp, setEditingExp] = useState(null);
   const [modal, setModal] = useState(false);
@@ -44,7 +53,7 @@ export default function TripPage() {
     if (!window.confirm("Delete this expense?")) return;
     try {
       await deleteExpense(expId);
-      refetch();
+      removeExpenseLocal(expId);
     } catch (e) {
       alert(e.message);
     }
@@ -223,9 +232,9 @@ export default function TripPage() {
         <AddExpenseModal
           trip={trip}
           onClose={() => setModal(false)}
-          onSaved={() => {
+          onSaved={(savedExpense) => {
             setModal(false);
-            refetch();
+            addExpenseLocal(savedExpense);
           }}
           initialValues={null}
         />
@@ -235,9 +244,9 @@ export default function TripPage() {
         <AddExpenseModal
           trip={trip}
           onClose={() => setEditingExp(null)}
-          onSaved={() => {
+          onSaved={(savedExpense) => {
             setEditingExp(null);
-            refetch();
+            updateExpenseLocal(savedExpense);
           }}
           editingExp={editingExp}
           initialValues={editingExp}
@@ -245,11 +254,4 @@ export default function TripPage() {
       )}
     </div>
   );
-}
-
-function netStyle(net) {
-  const base = { fontFamily: "monospace", fontWeight: 600, fontSize: 14 };
-  if (net > 0.01) return { ...base, color: "#0F6E56" };
-  if (net < -0.01) return { ...base, color: "#A32D2D" };
-  return { ...base, color: "#888" };
 }

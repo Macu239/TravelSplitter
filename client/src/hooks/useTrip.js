@@ -36,5 +36,39 @@ export function useTrip(tripId) {
     fetchAll();
   }, [fetchAll]);
 
-  return { trip, expenses, balance, loading, error, refetch: fetchAll };
+  const refetchBalance = useCallback(async () => {
+    if (!tripId) return;
+    try {
+      setBalance(await getTripBalance(tripId));
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [tripId]);
+
+  const addExpenseLocal = useCallback((expense) => {
+    setExpenses((prev) => [...prev, expense]);
+    refetchBalance();
+  }, [refetchBalance]);
+
+  const updateExpenseLocal = useCallback((expense) => {
+    setExpenses((prev) => prev.map((e) => (e._id === expense._id ? expense : e)));
+    refetchBalance();
+  }, [refetchBalance]);
+
+  const removeExpenseLocal = useCallback((expenseId) => {
+    setExpenses((prev) => prev.filter((e) => e._id !== expenseId));
+    refetchBalance();
+  }, [refetchBalance]);
+
+  return {
+    trip,
+    expenses,
+    balance,
+    loading,
+    error,
+    refetch: fetchAll,
+    addExpenseLocal,
+    updateExpenseLocal,
+    removeExpenseLocal,
+  };
 }
