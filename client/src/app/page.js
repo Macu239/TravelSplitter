@@ -86,7 +86,7 @@ export default function Home() {
         </div>
 
         {tab === "create" && (
-          <form onSubmit={handleCreate} className="creatTrip">
+          <form onSubmit={handleCreate}>
             <div className={styles.field}>
               <label className={styles.label}>Trip name</label>
               <input

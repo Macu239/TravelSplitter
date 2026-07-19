@@ -10,7 +10,7 @@
 }
 
 .icon {
-  font-size: 44;
+  font-size: 44px;
   margin-bottom: 12px;
 }
 
@@ -56,10 +56,6 @@
 .tabActive {
   color: var(--primary-purple);
   border-bottom-color: var(--primary-purple);
-}
-
-.creatTrip{
-  height: auto;
 }
 
 .field {

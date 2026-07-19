@@ -21,6 +21,10 @@
   flex-wrap: wrap;
 }
 
+.errorText {
+  color: #a32d2d;
+}
+
 /* back button */
 .backBtn {
   background: none;
@@ -163,7 +167,6 @@
 
 .expenseRow:hover {
   background-color: #e9ecef67;
-  padding: 12px 1rem;
   cursor: pointer;
 }
 
@@ -222,15 +225,6 @@
 
 /* delete button */
 .delBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #ccc;
-  padding: 2px;
-}
-
-.editBtn {
   background: none;
   border: none;
   cursor: pointer;
@@ -334,7 +328,7 @@
   .backBtn{
     width: 20%;
   }
-  .header > div:has(.titleRow) {
+  .headerInfo {
     width: 80%;
   }
 

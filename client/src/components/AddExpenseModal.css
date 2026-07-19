@@ -25,6 +25,11 @@
   margin-bottom: 16px;
 }
 
+.modalTitle {
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .closeBtn {
   background: none;
   border: none;
@@ -58,12 +63,21 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 12px;
-  gap: 10;
+  gap: 10px;
 }
 
-#amountAndDate {
+.amountAndDate {
   flex-direction: row;
   gap: 12px;
+}
+
+.amountDateCol {
+  flex: 1;
+}
+
+.participantsCount {
+  color: #888;
+  font-weight: 400;
 }
 
 .checkGrid {
@@ -82,15 +96,12 @@
   border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
-  color: transparent;
+  color: var(--primary-text);
 }
 
 .checkItemChecked {
-  color: #f5f3ff;
-}
-
-.checkItem span {
-  color: var(--primary-text);
+  background: #f5f3ff;
+  border-color: var(--primary-btn);
 }
 
 input[type="checkbox"] {
@@ -104,6 +115,13 @@ input[type="checkbox"] {
   color: #a32d2d;
   font-size: 13px;
   margin-top: 8px;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
 }
 
 .btnPrimary {

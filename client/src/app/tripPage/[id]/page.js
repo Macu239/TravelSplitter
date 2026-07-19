@@ -39,7 +39,7 @@ export default function TripPage() {
   if (error)
     return (
       <div className={styles.centered}>
-        <p style={{ color: "#A32D2D" }}>{error}</p>
+        <p className={styles.errorText}>{error}</p>
         <button className={styles.link} onClick={() => router.push("/")}>
           ← Home
         </button>
@@ -66,7 +66,7 @@ export default function TripPage() {
           ← trips
         </button>
 
-        <div>
+        <div className={styles.headerInfo}>
           <div className={styles.titleRow}>
             <h1 className={styles.title}>{trip.name}</h1>
             <ShareButton tripId={id} />
