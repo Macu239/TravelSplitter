@@ -60,8 +60,9 @@ export default function AddExpenseModal({
 
     setSaving(true);
     try {
+      let savedExpense;
       if (editingExp) {
-        await updateExpense(editingExp._id, {
+        savedExpense = await updateExpense(editingExp._id, {
           paidBy: form.paidBy,
           amount: parseFloat(form.amount),
           participants: form.participants,
@@ -69,7 +70,7 @@ export default function AddExpenseModal({
           date: form.date,
         });
       } else {
-        await addExpense({
+        savedExpense = await addExpense({
           tripId: trip._id,
           paidBy: form.paidBy,
           amount: parseFloat(form.amount),
@@ -78,7 +79,7 @@ export default function AddExpenseModal({
           date: form.date,
         });
       }
-      onSaved();
+      onSaved(savedExpense);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -93,7 +94,7 @@ export default function AddExpenseModal({
     >
       <div className="modal">
         <div className="modalHeader">
-          <span style={{ fontWeight: 600, fontSize: 16 }}>
+          <span className="modalTitle">
             {editingExp ? "Edit expense" : "Add expense"}
           </span>
           <button className="closeBtn" onClick={onClose}>
@@ -114,8 +115,8 @@ export default function AddExpenseModal({
             />
           </div>
 
-          <div className="field" id="amountAndDate">
-            <div style={{ flex: 1 }}>
+          <div className="field amountAndDate">
+            <div className="amountDateCol">
               <label className="label">Amount ($)</label>
               <input
                 className="input"
@@ -129,7 +130,7 @@ export default function AddExpenseModal({
                 }
               />
             </div>
-            <div style={{ flex: 1 }}>
+            <div className="amountDateCol">
               <label className="label">Date</label>
               <input
                 className="input"
@@ -163,7 +164,7 @@ export default function AddExpenseModal({
           <div className="field">
             <label className="label">
               Who shared this?{" "}
-              <span style={{ color: "#888", fontWeight: 400 }}>
+              <span className="participantsCount">
                 ({form.participants.length} of {members.length})
               </span>
             </label>
@@ -181,7 +182,7 @@ export default function AddExpenseModal({
                       onChange={() => toggleParticipant(m)}
                     />
                     <Avatar name={m} index={i} size={22} />
-                    <span style={{ fontSize: 13 }}>{m}</span>
+                    <span>{m}</span>
                   </label>
                 );
               })}
@@ -190,14 +191,7 @@ export default function AddExpenseModal({
 
           {error && <p className="errorStyle">{error}</p>}
 
-          <div
-            style={{
-              display: "flex",
-              gap: 8,
-              justifyContent: "flex-end",
-              marginTop: 16,
-            }}
-          >
+          <div className="formActions">
             <button type="button" className="btnSecondary" onClick={onClose}>
               Cancel
             </button>

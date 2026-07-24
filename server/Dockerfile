@@ -2,6 +2,7 @@ FROM node:20-alpine
 
 # Everything below runs relative to /app inside the container
 WORKDIR /app
+
 # Copy manifests first so `yarn install` is cached separately from source changes
 COPY yarn.lock package.json /app/
 RUN yarn install --frozen-lockfile  --production
